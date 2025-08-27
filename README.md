@@ -1,6 +1,6 @@
 # Taskbox Design System
 
-A comprehensive React design system built with TypeScript, Storybook, and design tokens. This system provides a complete set of components, patterns, and guidelines for building modern web applications.
+A comprehensive React design system built with TypeScript, Storybook, and design tokens. This system provides a complete set of components, patterns, and guidelines for building modern web applications. The design system is actively maintained and optimized for both developer experience and end-user accessibility.
 
 ## 🚀 Quick Start
 
