@@ -1,30 +1,200 @@
-.storybook-button {
-  display: inline-block;
+/* Button Component CSS - Matching Figma Design */
+
+:root {
+  /* Colors from Figma design */
+  --brand-600: #0F172A;
+  --brand-700: #0C1427;
+  --brand-200: #CBD5E1;
+  --white: #FFF;
+  --error-600: #06B6D4;
+  --error-700: #0891B2;
+  --error-800: #0E7490;
+  --error-300: #67E8F9;
+  --error-200: #A5F3FC;
+  --error-50: #ECFEFF;
+  --gray-300: #D5D7DA;
+  --gray-700: #414651;
+  --gray-800: #252B37;
+  --gray-200: #E9EAEB;
+  --gray-50: #FAFAFA;
+  
+  /* Focus ring colors */
+  --focus-primary: #E2E8F0;
+  --focus-secondary: #F5F5F5;
+  --focus-destructive: #CFFAFE;
+}
+
+.nexus-button {
+  /* Reset */
+  border: none;
+  background: none;
+  margin: 0;
+  padding: 0;
   cursor: pointer;
-  border: 0;
-  border-radius: 3em;
+  outline: none;
+  text-decoration: none;
+  
+  /* Base styles */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
   font-weight: 700;
   line-height: 1;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  position: relative;
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  user-select: none;
 }
-.storybook-button--primary {
-  background-color: #555ab9;
-  color: white;
-}
-.storybook-button--secondary {
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-  background-color: transparent;
-  color: #333;
-}
-.storybook-button--small {
+
+/* Size variants */
+.nexus-button--md {
   padding: 10px 16px;
-  font-size: 12px;
 }
-.storybook-button--medium {
-  padding: 11px 20px;
+
+.nexus-button--md .nexus-button__text {
   font-size: 14px;
+  line-height: 20px;
 }
-.storybook-button--large {
-  padding: 12px 24px;
+
+.nexus-button--lg {
+  padding: 10px 18px;
+}
+
+.nexus-button--lg .nexus-button__text {
   font-size: 16px;
+  line-height: 24px;
+}
+
+/* Primary hierarchy - Default (non-destructive) */
+.nexus-button--primary {
+  background: var(--brand-600);
+  border-color: var(--brand-600);
+  color: var(--white);
+}
+
+.nexus-button--primary:hover:not(:disabled) {
+  background: var(--brand-700);
+  border-color: var(--brand-700);
+}
+
+.nexus-button--primary:focus:not(:disabled) {
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px var(--focus-primary);
+}
+
+/* Primary hierarchy - Destructive */
+.nexus-button--primary.nexus-button--destructive {
+  background: var(--error-600);
+  border-color: var(--error-600);
+  color: var(--white);
+}
+
+.nexus-button--primary.nexus-button--destructive:hover:not(:disabled) {
+  background: var(--error-700);
+  border-color: var(--error-700);
+}
+
+.nexus-button--primary.nexus-button--destructive:focus:not(:disabled) {
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px var(--focus-destructive);
+}
+
+/* Primary hierarchy - Disabled */
+.nexus-button--primary:disabled {
+  background: var(--brand-200);
+  border-color: var(--brand-200);
+  color: var(--white);
+  cursor: not-allowed;
+}
+
+.nexus-button--primary.nexus-button--destructive:disabled {
+  background: var(--error-200);
+  border-color: var(--error-200);
+  color: var(--white);
+}
+
+/* Secondary gray hierarchy - Default (non-destructive) */
+.nexus-button--secondary-gray {
+  background: var(--white);
+  border-color: var(--gray-300);
+  color: var(--gray-700);
+}
+
+.nexus-button--secondary-gray:hover:not(:disabled) {
+  background: var(--gray-50);
+  color: var(--gray-800);
+}
+
+.nexus-button--secondary-gray:focus:not(:disabled) {
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px var(--focus-secondary);
+}
+
+/* Secondary gray hierarchy - Destructive */
+.nexus-button--secondary-gray.nexus-button--destructive {
+  background: var(--white);
+  border-color: var(--error-300);
+  color: var(--error-700);
+}
+
+.nexus-button--secondary-gray.nexus-button--destructive:hover:not(:disabled) {
+  background: var(--error-50);
+  color: var(--error-800);
+}
+
+.nexus-button--secondary-gray.nexus-button--destructive:focus:not(:disabled) {
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px var(--focus-destructive);
+}
+
+/* Secondary gray hierarchy - Disabled */
+.nexus-button--secondary-gray:disabled {
+  background: var(--white);
+  border-color: var(--gray-200);
+  color: var(--gray-300);
+  cursor: not-allowed;
+}
+
+.nexus-button--secondary-gray.nexus-button--destructive:disabled {
+  background: var(--white);
+  border-color: var(--error-200);
+  color: var(--error-300);
+}
+
+/* Icon spacing */
+.nexus-button--with-icon {
+  /* Icon spacing is handled by gap in flex container */
+}
+
+/* Text element */
+.nexus-button__text {
+  display: inline-block;
+}
+
+/* Focus visible for keyboard navigation */
+.nexus-button:focus-visible:not(:disabled) {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+/* Active state */
+.nexus-button:active:not(:disabled) {
+  transform: translateY(0.5px);
+}
+
+/* Disabled state */
+.nexus-button:disabled {
+  pointer-events: none;
+  transform: none;
+}
+
+/* Remove old storybook styles to prevent conflicts */
+.storybook-button,
+.storybook-button--primary,
+.storybook-button--secondary,
+.storybook-button--small,
+.storybook-button--medium,
+.storybook-button--large {
+  display: none;
 }
