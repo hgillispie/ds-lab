@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
+import { createElement } from "react";
 
 import { Button } from "./Button";
 
@@ -161,41 +162,75 @@ export const DisabledDestructive: Story = {
 
 // Comprehensive showcase
 export const AllVariants: Story = {
-  render: () => `
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding: 24px; font-family: Inter, sans-serif;">
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <h3 style="margin: 0; font-size: 14px; font-weight: 600; color: #374151;">Primary - Medium</h3>
-        ${Button({ children: "Button CTA", hierarchy: "primary", size: "md" })}
-        ${Button({ children: "Button CTA", hierarchy: "primary", size: "md", destructive: true })}
-        ${Button({ children: "Button CTA", hierarchy: "primary", size: "md", icon: true })}
-        ${Button({ children: "Button CTA", hierarchy: "primary", size: "md", disabled: true })}
-      </div>
-      
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <h3 style="margin: 0; font-size: 14px; font-weight: 600; color: #374151;">Primary - Large</h3>
-        ${Button({ children: "Button CTA", hierarchy: "primary", size: "lg" })}
-        ${Button({ children: "Button CTA", hierarchy: "primary", size: "lg", destructive: true })}
-        ${Button({ children: "Button CTA", hierarchy: "primary", size: "lg", icon: true })}
-        ${Button({ children: "Button CTA", hierarchy: "primary", size: "lg", disabled: true })}
-      </div>
-      
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <h3 style="margin: 0; font-size: 14px; font-weight: 600; color: #374151;">Secondary - Medium</h3>
-        ${Button({ children: "Button CTA", hierarchy: "secondary-gray", size: "md" })}
-        ${Button({ children: "Button CTA", hierarchy: "secondary-gray", size: "md", destructive: true })}
-        ${Button({ children: "Button CTA", hierarchy: "secondary-gray", size: "md", icon: true })}
-        ${Button({ children: "Button CTA", hierarchy: "secondary-gray", size: "md", disabled: true })}
-      </div>
-      
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <h3 style="margin: 0; font-size: 14px; font-weight: 600; color: #374151;">Secondary - Large</h3>
-        ${Button({ children: "Button CTA", hierarchy: "secondary-gray", size: "lg" })}
-        ${Button({ children: "Button CTA", hierarchy: "secondary-gray", size: "lg", destructive: true })}
-        ${Button({ children: "Button CTA", hierarchy: "secondary-gray", size: "lg", icon: true })}
-        ${Button({ children: "Button CTA", hierarchy: "secondary-gray", size: "lg", disabled: true })}
-      </div>
-    </div>
-  `,
+  render: () => createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "repeat(4, 1fr)",
+      gap: "24px",
+      padding: "24px",
+      fontFamily: "Inter, sans-serif",
+    }
+  }, [
+    // Primary Medium
+    createElement("div", {
+      key: "primary-md",
+      style: { display: "flex", flexDirection: "column", gap: "16px" }
+    }, [
+      createElement("h3", {
+        key: "title",
+        style: { margin: 0, fontSize: "14px", fontWeight: 600, color: "#374151" }
+      }, "Primary - Medium"),
+      createElement(Button, { key: "normal", children: "Button CTA", hierarchy: "primary", size: "md" }),
+      createElement(Button, { key: "destructive", children: "Button CTA", hierarchy: "primary", size: "md", destructive: true }),
+      createElement(Button, { key: "icon", children: "Button CTA", hierarchy: "primary", size: "md", icon: true }),
+      createElement(Button, { key: "disabled", children: "Button CTA", hierarchy: "primary", size: "md", disabled: true }),
+    ]),
+    
+    // Primary Large
+    createElement("div", {
+      key: "primary-lg",
+      style: { display: "flex", flexDirection: "column", gap: "16px" }
+    }, [
+      createElement("h3", {
+        key: "title",
+        style: { margin: 0, fontSize: "14px", fontWeight: 600, color: "#374151" }
+      }, "Primary - Large"),
+      createElement(Button, { key: "normal", children: "Button CTA", hierarchy: "primary", size: "lg" }),
+      createElement(Button, { key: "destructive", children: "Button CTA", hierarchy: "primary", size: "lg", destructive: true }),
+      createElement(Button, { key: "icon", children: "Button CTA", hierarchy: "primary", size: "lg", icon: true }),
+      createElement(Button, { key: "disabled", children: "Button CTA", hierarchy: "primary", size: "lg", disabled: true }),
+    ]),
+    
+    // Secondary Medium
+    createElement("div", {
+      key: "secondary-md",
+      style: { display: "flex", flexDirection: "column", gap: "16px" }
+    }, [
+      createElement("h3", {
+        key: "title",
+        style: { margin: 0, fontSize: "14px", fontWeight: 600, color: "#374151" }
+      }, "Secondary - Medium"),
+      createElement(Button, { key: "normal", children: "Button CTA", hierarchy: "secondary-gray", size: "md" }),
+      createElement(Button, { key: "destructive", children: "Button CTA", hierarchy: "secondary-gray", size: "md", destructive: true }),
+      createElement(Button, { key: "icon", children: "Button CTA", hierarchy: "secondary-gray", size: "md", icon: true }),
+      createElement(Button, { key: "disabled", children: "Button CTA", hierarchy: "secondary-gray", size: "md", disabled: true }),
+    ]),
+    
+    // Secondary Large
+    createElement("div", {
+      key: "secondary-lg",
+      style: { display: "flex", flexDirection: "column", gap: "16px" }
+    }, [
+      createElement("h3", {
+        key: "title",
+        style: { margin: 0, fontSize: "14px", fontWeight: 600, color: "#374151" }
+      }, "Secondary - Large"),
+      createElement(Button, { key: "normal", children: "Button CTA", hierarchy: "secondary-gray", size: "lg" }),
+      createElement(Button, { key: "destructive", children: "Button CTA", hierarchy: "secondary-gray", size: "lg", destructive: true }),
+      createElement(Button, { key: "icon", children: "Button CTA", hierarchy: "secondary-gray", size: "lg", icon: true }),
+      createElement(Button, { key: "disabled", children: "Button CTA", hierarchy: "secondary-gray", size: "lg", disabled: true }),
+    ]),
+  ]),
   parameters: {
     docs: {
       description: {
@@ -207,29 +242,38 @@ export const AllVariants: Story = {
 
 // Interactive examples
 export const InteractiveExample: Story = {
-  render: () => `
-    <div style="display: flex; flex-wrap: wrap; gap: 16px; padding: 24px; font-family: Inter, sans-serif;">
-      ${Button({ 
-        children: "Save Changes", 
-        hierarchy: "primary", 
-        size: "lg",
-        onClick: () => alert("Changes saved!") 
-      })}
-      ${Button({ 
-        children: "Cancel", 
-        hierarchy: "secondary-gray", 
-        size: "lg",
-        onClick: () => alert("Cancelled!") 
-      })}
-      ${Button({ 
-        children: "Delete Account", 
-        hierarchy: "primary", 
-        destructive: true,
-        icon: true,
-        onClick: () => confirm("Are you sure you want to delete your account?") 
-      })}
-    </div>
-  `,
+  render: () => createElement("div", {
+    style: {
+      display: "flex",
+      flexWrap: "wrap",
+      gap: "16px",
+      padding: "24px",
+      fontFamily: "Inter, sans-serif",
+    }
+  }, [
+    createElement(Button, {
+      key: "save",
+      children: "Save Changes",
+      hierarchy: "primary",
+      size: "lg",
+      onClick: () => alert("Changes saved!")
+    }),
+    createElement(Button, {
+      key: "cancel",
+      children: "Cancel",
+      hierarchy: "secondary-gray",
+      size: "lg",
+      onClick: () => alert("Cancelled!")
+    }),
+    createElement(Button, {
+      key: "delete",
+      children: "Delete Account",
+      hierarchy: "primary",
+      destructive: true,
+      icon: true,
+      onClick: () => confirm("Are you sure you want to delete your account?")
+    }),
+  ]),
   parameters: {
     docs: {
       description: {
