@@ -1,30 +1,254 @@
-.storybook-button {
-  display: inline-block;
-  cursor: pointer;
-  border: 0;
-  border-radius: 3em;
+/* Button Component CSS - Matches Figma Design System */
+
+/* CSS Custom Properties from Figma Design */
+:root {
+  --brand-600: #0F172A;
+  --brand-700: #0C1427;
+  --brand-200: #CBD5E1;
+  --white: #FFF;
+  --error-600: #06B6D4;
+  --error-700: #0891B2;
+  --error-800: #0E7490;
+  --error-300: #67E8F9;
+  --error-200: #A5F3FC;
+  --error-50: #ECFEFF;
+  --gray-300: #D5D7DA;
+  --gray-700: #414651;
+  --gray-800: #252B37;
+  --gray-200: #E9EAEB;
+  --gray-50: #FAFAFA;
+  --focus-primary: #E2E8F0;
+  --focus-secondary: #F5F5F5;
+  --focus-error: #CFFAFE;
+}
+
+/* Base Button Styles */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-style: normal;
   font-weight: 700;
   line-height: 1;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05);
+  text-decoration: none;
+  position: relative;
+  outline: none;
 }
-.storybook-button--primary {
-  background-color: #555ab9;
-  color: white;
+
+.button:focus {
+  outline: none;
 }
-.storybook-button--secondary {
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-  background-color: transparent;
-  color: #333;
+
+.button__text {
+  display: inline-block;
 }
-.storybook-button--small {
+
+.button__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+/* Size Variants */
+.button--size-md {
   padding: 10px 16px;
-  font-size: 12px;
-}
-.storybook-button--medium {
-  padding: 11px 20px;
   font-size: 14px;
+  line-height: 20px;
 }
-.storybook-button--large {
-  padding: 12px 24px;
+
+.button--size-lg {
+  padding: 10px 18px;
   font-size: 16px;
+  line-height: 24px;
+}
+
+/* Primary Hierarchy - Normal (Non-destructive) */
+.button--hierarchy-primary.button--normal {
+  background: var(--brand-600);
+  border-color: var(--brand-600);
+  color: var(--white);
+}
+
+.button--hierarchy-primary.button--normal:hover,
+.button--hierarchy-primary.button--normal.button--state-hover {
+  background: var(--brand-700);
+  border-color: var(--brand-700);
+  color: var(--white);
+}
+
+.button--hierarchy-primary.button--normal:focus,
+.button--hierarchy-primary.button--normal.button--state-focused {
+  background: var(--brand-600);
+  border-color: var(--brand-600);
+  color: var(--white);
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px var(--focus-primary);
+}
+
+.button--hierarchy-primary.button--normal.button--disabled,
+.button--hierarchy-primary.button--normal:disabled,
+.button--hierarchy-primary.button--normal.button--state-disabled {
+  background: var(--brand-200);
+  border-color: var(--brand-200);
+  color: var(--white);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* Primary Hierarchy - Destructive */
+.button--hierarchy-primary.button--destructive {
+  background: var(--error-600);
+  border-color: var(--error-600);
+  color: var(--white);
+}
+
+.button--hierarchy-primary.button--destructive:hover,
+.button--hierarchy-primary.button--destructive.button--state-hover {
+  background: var(--error-700);
+  border-color: var(--error-700);
+  color: var(--white);
+}
+
+.button--hierarchy-primary.button--destructive:focus,
+.button--hierarchy-primary.button--destructive.button--state-focused {
+  background: var(--error-600);
+  border-color: var(--error-600);
+  color: var(--white);
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px var(--focus-error);
+}
+
+.button--hierarchy-primary.button--destructive.button--disabled,
+.button--hierarchy-primary.button--destructive:disabled,
+.button--hierarchy-primary.button--destructive.button--state-disabled {
+  background: var(--error-200);
+  border-color: var(--error-200);
+  color: var(--white);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* Secondary Gray Hierarchy - Normal (Non-destructive) */
+.button--hierarchy-secondary-gray.button--normal {
+  background: var(--white);
+  border-color: var(--gray-300);
+  color: var(--gray-700);
+}
+
+.button--hierarchy-secondary-gray.button--normal:hover,
+.button--hierarchy-secondary-gray.button--normal.button--state-hover {
+  background: var(--gray-50);
+  border-color: var(--gray-300);
+  color: var(--gray-800);
+}
+
+.button--hierarchy-secondary-gray.button--normal:focus,
+.button--hierarchy-secondary-gray.button--normal.button--state-focused {
+  background: var(--white);
+  border-color: var(--gray-300);
+  color: var(--gray-700);
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px var(--focus-secondary);
+}
+
+.button--hierarchy-secondary-gray.button--normal.button--disabled,
+.button--hierarchy-secondary-gray.button--normal:disabled,
+.button--hierarchy-secondary-gray.button--normal.button--state-disabled {
+  background: var(--white);
+  border-color: var(--gray-200);
+  color: var(--gray-300);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* Secondary Gray Hierarchy - Destructive */
+.button--hierarchy-secondary-gray.button--destructive {
+  background: var(--white);
+  border-color: var(--error-300);
+  color: var(--error-700);
+}
+
+.button--hierarchy-secondary-gray.button--destructive:hover,
+.button--hierarchy-secondary-gray.button--destructive.button--state-hover {
+  background: var(--error-50);
+  border-color: var(--error-300);
+  color: var(--error-800);
+}
+
+.button--hierarchy-secondary-gray.button--destructive:focus,
+.button--hierarchy-secondary-gray.button--destructive.button--state-focused {
+  background: var(--white);
+  border-color: var(--error-300);
+  color: var(--error-700);
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px var(--focus-error);
+}
+
+.button--hierarchy-secondary-gray.button--destructive.button--disabled,
+.button--hierarchy-secondary-gray.button--destructive:disabled,
+.button--hierarchy-secondary-gray.button--destructive.button--state-disabled {
+  background: var(--white);
+  border-color: var(--error-200);
+  color: var(--error-300);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* Icon Styling */
+.button--with-icon .button__icon {
+  margin-left: 0;
+}
+
+/* Disabled state override */
+.button--disabled,
+.button:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Remove default button styles */
+.button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Reapply border for our design */
+.button {
+  border: 1px solid;
+}
+
+/* Focus visible for accessibility */
+.button:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+/* Active state should match hover */
+.button:active {
+  transform: translateY(0);
+}
+
+/* Ensure proper text rendering */
+.button__text {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Ensure icon inherits color correctly */
+.button__icon {
+  color: inherit;
+}
+
+.button__icon path {
+  stroke: currentColor;
 }
