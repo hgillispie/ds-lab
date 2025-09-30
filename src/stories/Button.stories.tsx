@@ -205,11 +205,11 @@ export const AllVariants: Story = {
         display: "grid", 
         gap: "24px", 
         padding: "24px",
-        gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+        gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
         maxWidth: "1200px"
       }}>
         <div>
-          <h3 style={{ marginBottom: "16px", fontSize: "16px", fontWeight: "600" }}>Medium Size</h3>
+          <h3 style={{ marginBottom: "16px", fontSize: "16px", fontWeight: "600", fontFamily: "Inter" }}>Medium Size</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {variants.map((variant, index) => (
               <Button
@@ -226,7 +226,7 @@ export const AllVariants: Story = {
         </div>
 
         <div>
-          <h3 style={{ marginBottom: "16px", fontSize: "16px", fontWeight: "600" }}>Large Size</h3>
+          <h3 style={{ marginBottom: "16px", fontSize: "16px", fontWeight: "600", fontFamily: "Inter" }}>Large Size</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {variants.map((variant, index) => (
               <Button
@@ -243,7 +243,7 @@ export const AllVariants: Story = {
         </div>
 
         <div>
-          <h3 style={{ marginBottom: "16px", fontSize: "16px", fontWeight: "600" }}>Disabled States</h3>
+          <h3 style={{ marginBottom: "16px", fontSize: "16px", fontWeight: "600", fontFamily: "Inter" }}>Disabled States</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             <Button hierarchy="primary" destructive={false} disabled>Primary Disabled</Button>
             <Button hierarchy="primary" destructive={true} disabled>Primary Destructive Disabled</Button>
