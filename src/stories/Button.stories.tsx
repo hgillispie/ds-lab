@@ -155,6 +155,24 @@ export const LargeWithIcon: Story = {
   },
 };
 
+export const LargeSecondary: Story = {
+  args: {
+    size: "lg",
+    hierarchy: "secondary-gray",
+    destructive: false,
+    showIcon: false,
+  },
+};
+
+export const LargeSecondaryWithIcon: Story = {
+  args: {
+    size: "lg",
+    hierarchy: "secondary-gray",
+    destructive: false,
+    showIcon: true,
+  },
+};
+
 // Disabled states
 export const Disabled: Story = {
   args: {
@@ -186,75 +204,12 @@ export const DisabledDestructive: Story = {
   },
 };
 
-// All variants showcase
-export const AllVariants: Story = {
-  render: () => {
-    const variants = [
-      { hierarchy: "primary", destructive: false, showIcon: false, label: "Primary" },
-      { hierarchy: "primary", destructive: true, showIcon: false, label: "Primary Destructive" },
-      { hierarchy: "primary", destructive: false, showIcon: true, label: "Primary + Icon" },
-      { hierarchy: "primary", destructive: true, showIcon: true, label: "Primary Destructive + Icon" },
-      { hierarchy: "secondary-gray", destructive: false, showIcon: false, label: "Secondary" },
-      { hierarchy: "secondary-gray", destructive: true, showIcon: false, label: "Secondary Destructive" },
-      { hierarchy: "secondary-gray", destructive: false, showIcon: true, label: "Secondary + Icon" },
-      { hierarchy: "secondary-gray", destructive: true, showIcon: true, label: "Secondary Destructive + Icon" },
-    ];
-
-    return (
-      <div style={{ 
-        display: "grid", 
-        gap: "24px", 
-        padding: "24px",
-        gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-        maxWidth: "1200px"
-      }}>
-        <div>
-          <h3 style={{ marginBottom: "16px", fontSize: "16px", fontWeight: "600", fontFamily: "Inter" }}>Medium Size</h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-            {variants.map((variant, index) => (
-              <Button
-                key={`md-${index}`}
-                size="md"
-                hierarchy={variant.hierarchy as "primary" | "secondary-gray"}
-                destructive={variant.destructive}
-                showIcon={variant.showIcon}
-              >
-                {variant.label}
-              </Button>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h3 style={{ marginBottom: "16px", fontSize: "16px", fontWeight: "600", fontFamily: "Inter" }}>Large Size</h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-            {variants.map((variant, index) => (
-              <Button
-                key={`lg-${index}`}
-                size="lg"
-                hierarchy={variant.hierarchy as "primary" | "secondary-gray"}
-                destructive={variant.destructive}
-                showIcon={variant.showIcon}
-              >
-                {variant.label}
-              </Button>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h3 style={{ marginBottom: "16px", fontSize: "16px", fontWeight: "600", fontFamily: "Inter" }}>Disabled States</h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-            <Button hierarchy="primary" destructive={false} disabled>Primary Disabled</Button>
-            <Button hierarchy="primary" destructive={true} disabled>Primary Destructive Disabled</Button>
-            <Button hierarchy="secondary-gray" destructive={false} disabled>Secondary Disabled</Button>
-            <Button hierarchy="secondary-gray" destructive={true} disabled>Secondary Destructive Disabled</Button>
-          </div>
-        </div>
-      </div>
-    );
-  },
-  parameters: {
-    layout: "fullscreen",
+export const DisabledSecondaryDestructive: Story = {
+  args: {
+    hierarchy: "secondary-gray",
+    size: "md",
+    destructive: true,
+    showIcon: false,
+    disabled: true,
   },
 };
