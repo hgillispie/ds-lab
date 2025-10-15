@@ -128,6 +128,7 @@ export const Focused: Story = {
 export const AllVariants: Story = {
   render: () => {
     const variants = [
+      // Medium size
       { size: "md" as const, hierarchy: "primary" as const, destructive: false, icon: false, state: "default" as const },
       { size: "md" as const, hierarchy: "primary" as const, destructive: true, icon: false, state: "default" as const },
       { size: "md" as const, hierarchy: "primary" as const, destructive: false, icon: true, state: "default" as const },
@@ -138,16 +139,19 @@ export const AllVariants: Story = {
       { size: "md" as const, hierarchy: "secondary-gray" as const, destructive: false, icon: true, state: "default" as const },
       { size: "md" as const, hierarchy: "secondary-gray" as const, destructive: true, icon: true, state: "default" as const },
       
+      // Disabled states
       { size: "md" as const, hierarchy: "primary" as const, destructive: false, icon: false, state: "disabled" as const },
       { size: "md" as const, hierarchy: "primary" as const, destructive: true, icon: false, state: "disabled" as const },
       { size: "md" as const, hierarchy: "secondary-gray" as const, destructive: false, icon: false, state: "disabled" as const },
       { size: "md" as const, hierarchy: "secondary-gray" as const, destructive: true, icon: false, state: "disabled" as const },
       
+      // Hover states
       { size: "md" as const, hierarchy: "primary" as const, destructive: false, icon: false, state: "hover" as const },
       { size: "md" as const, hierarchy: "primary" as const, destructive: true, icon: false, state: "hover" as const },
       { size: "md" as const, hierarchy: "secondary-gray" as const, destructive: false, icon: false, state: "hover" as const },
       { size: "md" as const, hierarchy: "secondary-gray" as const, destructive: true, icon: false, state: "hover" as const },
       
+      // Large size
       { size: "lg" as const, hierarchy: "primary" as const, destructive: false, icon: false, state: "default" as const },
       { size: "lg" as const, hierarchy: "primary" as const, destructive: true, icon: false, state: "default" as const },
       { size: "lg" as const, hierarchy: "secondary-gray" as const, destructive: false, icon: false, state: "default" as const },
