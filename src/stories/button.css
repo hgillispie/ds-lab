@@ -1,30 +1,197 @@
-.storybook-button {
-  display: inline-block;
+/* Button Component Styles - Nexus Design System */
+
+:root {
+  --brand-600: #0F172A;
+  --brand-700: #0C1427;
+  --brand-200: #CBD5E1;
+  --white: #FFF;
+  --error-600: #06B6D4;
+  --error-700: #0891B2;
+  --error-300: #67E8F9;
+  --error-200: #A5F3FC;
+  --error-50: #ECFEFF;
+  --error-800: #0E7490;
+  --gray-300: #D5D7DA;
+  --gray-700: #414651;
+  --gray-200: #E9EAEB;
+  --gray-50: #FAFAFA;
+  --gray-800: #252B37;
+  
+  --focus-ring-primary: #E2E8F0;
+  --focus-ring-destructive: #CFFAFE;
+  --focus-ring-gray: #F5F5F5;
+}
+
+.nexus-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 600;
   cursor: pointer;
-  border: 0;
-  border-radius: 3em;
+  border: 1px solid;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05);
+  transition: all 150ms ease;
+}
+
+.nexus-button__text {
   font-weight: 700;
-  line-height: 1;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.storybook-button--primary {
-  background-color: #555ab9;
-  color: white;
+
+.nexus-button__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
-.storybook-button--secondary {
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-  background-color: transparent;
-  color: #333;
-}
-.storybook-button--small {
+
+/* Size Variants */
+.nexus-button--md {
   padding: 10px 16px;
-  font-size: 12px;
-}
-.storybook-button--medium {
-  padding: 11px 20px;
   font-size: 14px;
+  line-height: 20px;
 }
-.storybook-button--large {
-  padding: 12px 24px;
+
+.nexus-button--lg {
+  padding: 10px 18px;
   font-size: 16px;
+  line-height: 24px;
+}
+
+/* Primary Hierarchy - Default (Non-destructive) */
+.nexus-button--primary {
+  background: var(--brand-600);
+  border-color: var(--brand-600);
+  color: var(--white);
+}
+
+.nexus-button--primary .nexus-button__icon {
+  stroke: var(--white);
+}
+
+.nexus-button--primary:hover:not(:disabled),
+.nexus-button--primary.nexus-button--hover {
+  background: var(--brand-700);
+  border-color: var(--brand-700);
+}
+
+.nexus-button--primary:focus:not(:disabled),
+.nexus-button--primary.nexus-button--focused {
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px var(--focus-ring-primary);
+}
+
+.nexus-button--primary:disabled,
+.nexus-button--primary.nexus-button--disabled {
+  background: var(--brand-200);
+  border-color: var(--brand-200);
+  cursor: not-allowed;
+}
+
+/* Primary Hierarchy - Destructive */
+.nexus-button--primary.nexus-button--destructive {
+  background: var(--error-600);
+  border-color: var(--error-600);
+  color: var(--white);
+}
+
+.nexus-button--primary.nexus-button--destructive .nexus-button__icon {
+  stroke: var(--white);
+}
+
+.nexus-button--primary.nexus-button--destructive:hover:not(:disabled),
+.nexus-button--primary.nexus-button--destructive.nexus-button--hover {
+  background: var(--error-700);
+  border-color: var(--error-700);
+}
+
+.nexus-button--primary.nexus-button--destructive:focus:not(:disabled),
+.nexus-button--primary.nexus-button--destructive.nexus-button--focused {
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px var(--focus-ring-destructive);
+}
+
+.nexus-button--primary.nexus-button--destructive:disabled,
+.nexus-button--primary.nexus-button--destructive.nexus-button--disabled {
+  background: var(--error-200);
+  border-color: var(--error-200);
+  cursor: not-allowed;
+}
+
+/* Secondary Gray Hierarchy - Default (Non-destructive) */
+.nexus-button--secondary-gray {
+  background: var(--white);
+  border-color: var(--gray-300);
+  color: var(--gray-700);
+}
+
+.nexus-button--secondary-gray .nexus-button__icon {
+  stroke: var(--gray-700);
+}
+
+.nexus-button--secondary-gray:hover:not(:disabled),
+.nexus-button--secondary-gray.nexus-button--hover {
+  background: var(--gray-50);
+  color: var(--gray-800);
+}
+
+.nexus-button--secondary-gray:hover:not(:disabled) .nexus-button__icon,
+.nexus-button--secondary-gray.nexus-button--hover .nexus-button__icon {
+  stroke: var(--gray-800);
+}
+
+.nexus-button--secondary-gray:focus:not(:disabled),
+.nexus-button--secondary-gray.nexus-button--focused {
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px var(--focus-ring-gray);
+}
+
+.nexus-button--secondary-gray:disabled,
+.nexus-button--secondary-gray.nexus-button--disabled {
+  border-color: var(--gray-200);
+  color: var(--gray-300);
+  cursor: not-allowed;
+}
+
+.nexus-button--secondary-gray:disabled .nexus-button__icon,
+.nexus-button--secondary-gray.nexus-button--disabled .nexus-button__icon {
+  stroke: var(--gray-300);
+}
+
+/* Secondary Gray Hierarchy - Destructive */
+.nexus-button--secondary-gray.nexus-button--destructive {
+  background: var(--white);
+  border-color: var(--error-300);
+  color: var(--error-700);
+}
+
+.nexus-button--secondary-gray.nexus-button--destructive .nexus-button__icon {
+  stroke: var(--error-700);
+}
+
+.nexus-button--secondary-gray.nexus-button--destructive:hover:not(:disabled),
+.nexus-button--secondary-gray.nexus-button--destructive.nexus-button--hover {
+  background: var(--error-50);
+  color: var(--error-800);
+}
+
+.nexus-button--secondary-gray.nexus-button--destructive:hover:not(:disabled) .nexus-button__icon,
+.nexus-button--secondary-gray.nexus-button--destructive.nexus-button--hover .nexus-button__icon {
+  stroke: var(--error-800);
+}
+
+.nexus-button--secondary-gray.nexus-button--destructive:focus:not(:disabled),
+.nexus-button--secondary-gray.nexus-button--destructive.nexus-button--focused {
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px var(--focus-ring-destructive);
+}
+
+.nexus-button--secondary-gray.nexus-button--destructive:disabled,
+.nexus-button--secondary-gray.nexus-button--destructive.nexus-button--disabled {
+  border-color: var(--error-200);
+  color: var(--error-300);
+  cursor: not-allowed;
+}
+
+.nexus-button--secondary-gray.nexus-button--destructive:disabled .nexus-button__icon,
+.nexus-button--secondary-gray.nexus-button--destructive.nexus-button--disabled .nexus-button__icon {
+  stroke: var(--error-300);
 }
