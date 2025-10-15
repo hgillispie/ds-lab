@@ -3,51 +3,208 @@ import { fn } from "@storybook/test";
 
 import { Button } from "./Button";
 
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
   title: "Example/Button",
   component: Button,
   parameters: {
-    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    layout: "centered",
+    layout: "padded",
   },
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    backgroundColor: { control: "color" },
+    size: {
+      control: "select",
+      options: ["md", "lg"],
+      description: "Button size",
+    },
+    hierarchy: {
+      control: "select",
+      options: ["primary", "secondary-gray"],
+      description: "Button hierarchy/variant",
+    },
+    icon: {
+      control: "boolean",
+      description: "Show trailing icon",
+    },
+    destructive: {
+      control: "boolean",
+      description: "Use destructive color scheme (cyan)",
+    },
+    state: {
+      control: "select",
+      options: ["default", "hover", "focused", "disabled"],
+      description: "Button state",
+    },
+    label: {
+      control: "text",
+      description: "Button text",
+    },
   },
-  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  args: { onClick: fn() },
+  args: { 
+    onClick: fn(),
+    label: "Button CTA",
+  },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   args: {
-    primary: true,
-    label: "Button",
+    hierarchy: "primary",
+    size: "md",
   },
 };
 
-export const Secondary: Story = {
+export const PrimaryDestructive: Story = {
   args: {
-    label: "Button",
+    hierarchy: "primary",
+    destructive: true,
+    size: "md",
+  },
+};
+
+export const SecondaryGray: Story = {
+  args: {
+    hierarchy: "secondary-gray",
+    size: "md",
+  },
+};
+
+export const SecondaryGrayDestructive: Story = {
+  args: {
+    hierarchy: "secondary-gray",
+    destructive: true,
+    size: "md",
+  },
+};
+
+export const WithIcon: Story = {
+  args: {
+    hierarchy: "primary",
+    icon: true,
+    size: "md",
   },
 };
 
 export const Large: Story = {
   args: {
-    size: "large",
-    label: "Button",
+    hierarchy: "primary",
+    size: "lg",
   },
 };
 
-export const Small: Story = {
+export const LargeWithIcon: Story = {
   args: {
-    size: "small",
-    label: "Button",
+    hierarchy: "primary",
+    icon: true,
+    size: "lg",
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    hierarchy: "primary",
+    state: "disabled",
+    size: "md",
+  },
+};
+
+export const Hover: Story = {
+  args: {
+    hierarchy: "primary",
+    state: "hover",
+    size: "md",
+  },
+};
+
+export const Focused: Story = {
+  args: {
+    hierarchy: "primary",
+    state: "focused",
+    size: "md",
+  },
+};
+
+export const AllVariants: Story = {
+  render: () => {
+    const variants = [
+      // Medium size
+      { size: "md" as const, hierarchy: "primary" as const, destructive: false, icon: false, state: "default" as const },
+      { size: "md" as const, hierarchy: "primary" as const, destructive: true, icon: false, state: "default" as const },
+      { size: "md" as const, hierarchy: "primary" as const, destructive: false, icon: true, state: "default" as const },
+      { size: "md" as const, hierarchy: "primary" as const, destructive: true, icon: true, state: "default" as const },
+      
+      { size: "md" as const, hierarchy: "secondary-gray" as const, destructive: false, icon: false, state: "default" as const },
+      { size: "md" as const, hierarchy: "secondary-gray" as const, destructive: true, icon: false, state: "default" as const },
+      { size: "md" as const, hierarchy: "secondary-gray" as const, destructive: false, icon: true, state: "default" as const },
+      { size: "md" as const, hierarchy: "secondary-gray" as const, destructive: true, icon: true, state: "default" as const },
+      
+      // Disabled states
+      { size: "md" as const, hierarchy: "primary" as const, destructive: false, icon: false, state: "disabled" as const },
+      { size: "md" as const, hierarchy: "primary" as const, destructive: true, icon: false, state: "disabled" as const },
+      { size: "md" as const, hierarchy: "secondary-gray" as const, destructive: false, icon: false, state: "disabled" as const },
+      { size: "md" as const, hierarchy: "secondary-gray" as const, destructive: true, icon: false, state: "disabled" as const },
+      
+      // Hover states
+      { size: "md" as const, hierarchy: "primary" as const, destructive: false, icon: false, state: "hover" as const },
+      { size: "md" as const, hierarchy: "primary" as const, destructive: true, icon: false, state: "hover" as const },
+      { size: "md" as const, hierarchy: "secondary-gray" as const, destructive: false, icon: false, state: "hover" as const },
+      { size: "md" as const, hierarchy: "secondary-gray" as const, destructive: true, icon: false, state: "hover" as const },
+      
+      // Large size
+      { size: "lg" as const, hierarchy: "primary" as const, destructive: false, icon: false, state: "default" as const },
+      { size: "lg" as const, hierarchy: "primary" as const, destructive: true, icon: false, state: "default" as const },
+      { size: "lg" as const, hierarchy: "secondary-gray" as const, destructive: false, icon: false, state: "default" as const },
+      { size: "lg" as const, hierarchy: "secondary-gray" as const, destructive: true, icon: false, state: "default" as const },
+    ];
+    
+    return (
+      <div style={{ 
+        display: "flex", 
+        flexDirection: "column", 
+        gap: "24px",
+        maxWidth: "100%",
+        padding: "20px"
+      }}>
+        <div>
+          <h3 style={{ marginBottom: "16px", fontFamily: "Inter, sans-serif" }}>Medium Size - Default State</h3>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
+            {variants.slice(0, 8).map((variant, i) => (
+              <Button key={i} {...variant} />
+            ))}
+          </div>
+        </div>
+        
+        <div>
+          <h3 style={{ marginBottom: "16px", fontFamily: "Inter, sans-serif" }}>Medium Size - Disabled State</h3>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
+            {variants.slice(8, 12).map((variant, i) => (
+              <Button key={i} {...variant} />
+            ))}
+          </div>
+        </div>
+        
+        <div>
+          <h3 style={{ marginBottom: "16px", fontFamily: "Inter, sans-serif" }}>Medium Size - Hover State</h3>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
+            {variants.slice(12, 16).map((variant, i) => (
+              <Button key={i} {...variant} />
+            ))}
+          </div>
+        </div>
+        
+        <div>
+          <h3 style={{ marginBottom: "16px", fontFamily: "Inter, sans-serif" }}>Large Size - Default State</h3>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
+            {variants.slice(16, 20).map((variant, i) => (
+              <Button key={i} {...variant} />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  },
+  parameters: {
+    layout: "fullscreen",
   },
 };
