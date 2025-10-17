@@ -1,30 +1,153 @@
-.storybook-button {
-  display: inline-block;
-  cursor: pointer;
-  border: 0;
-  border-radius: 3em;
+/* Design System Button Styles - Matches Figma Design */
+
+.button-base {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-style: normal;
   font-weight: 700;
-  line-height: 1;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05);
 }
-.storybook-button--primary {
-  background-color: #555ab9;
-  color: white;
+
+.button-base:focus-visible {
+  outline: none;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px var(--focus-ring-color);
 }
-.storybook-button--secondary {
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-  background-color: transparent;
-  color: #333;
-}
-.storybook-button--small {
+
+/* Size Variants */
+.button-size--md {
   padding: 10px 16px;
-  font-size: 12px;
-}
-.storybook-button--medium {
-  padding: 11px 20px;
   font-size: 14px;
+  line-height: 20px;
 }
-.storybook-button--large {
-  padding: 12px 24px;
+
+.button-size--lg {
+  padding: 10px 18px;
   font-size: 16px;
+  line-height: 24px;
+}
+
+/* Primary Hierarchy - Default (Non-Destructive) */
+.button-hierarchy--primary {
+  background: #0F172A;
+  border-color: #0F172A;
+  color: #FFF;
+  --focus-ring-color: #E2E8F0;
+}
+
+.button-hierarchy--primary:hover:not(.button-disabled) {
+  background: #0C1427;
+  border-color: #0C1427;
+}
+
+.button-hierarchy--primary.button-disabled {
+  background: #CBD5E1;
+  border-color: #CBD5E1;
+  cursor: not-allowed;
+}
+
+/* Primary Hierarchy - Destructive */
+.button-hierarchy--primary.button-destructive {
+  background: #06B6D4;
+  border-color: #06B6D4;
+  color: #FFF;
+  --focus-ring-color: #CFFAFE;
+}
+
+.button-hierarchy--primary.button-destructive:hover:not(.button-disabled) {
+  background: #0891B2;
+  border-color: #0891B2;
+}
+
+.button-hierarchy--primary.button-destructive.button-disabled {
+  background: #A5F3FC;
+  border-color: #A5F3FC;
+}
+
+/* Secondary Gray Hierarchy - Default (Non-Destructive) */
+.button-hierarchy--secondary-gray {
+  background: #FFF;
+  border-color: #D5D7DA;
+  color: #414651;
+  --focus-ring-color: #F5F5F5;
+}
+
+.button-hierarchy--secondary-gray:hover:not(.button-disabled) {
+  background: #FAFAFA;
+  color: #252B37;
+}
+
+.button-hierarchy--secondary-gray.button-disabled {
+  border-color: #E9EAEB;
+  color: #D5D7DA;
+}
+
+/* Secondary Gray Hierarchy - Destructive */
+.button-hierarchy--secondary-gray.button-destructive {
+  background: #FFF;
+  border-color: #67E8F9;
+  color: #0891B2;
+  --focus-ring-color: #CFFAFE;
+}
+
+.button-hierarchy--secondary-gray.button-destructive:hover:not(.button-disabled) {
+  background: #ECFEFF;
+  color: #0E7490;
+}
+
+.button-hierarchy--secondary-gray.button-destructive.button-disabled {
+  border-color: #A5F3FC;
+  color: #67E8F9;
+}
+
+/* Icon Styles */
+.button-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.button-hierarchy--primary .button-icon path {
+  stroke: #FFF;
+}
+
+.button-hierarchy--secondary-gray .button-icon path {
+  stroke: #414651;
+}
+
+.button-hierarchy--secondary-gray:hover:not(.button-disabled) .button-icon path {
+  stroke: #252B37;
+}
+
+.button-hierarchy--secondary-gray.button-destructive .button-icon path {
+  stroke: #0891B2;
+}
+
+.button-hierarchy--secondary-gray.button-destructive:hover:not(.button-disabled) .button-icon path {
+  stroke: #0E7490;
+}
+
+.button-hierarchy--secondary-gray.button-disabled .button-icon path {
+  stroke: #D5D7DA;
+}
+
+.button-hierarchy--secondary-gray.button-destructive.button-disabled .button-icon path {
+  stroke: #67E8F9;
+}
+
+/* Text Wrapper */
+.button-text {
+  display: inline-block;
+}
+
+/* Disabled State */
+.button-disabled {
+  cursor: not-allowed;
+  pointer-events: none;
 }
