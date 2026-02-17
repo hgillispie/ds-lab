@@ -1,30 +1,173 @@
-.storybook-button {
-  display: inline-block;
+/* Button base styles */
+.nexus-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 600;
   cursor: pointer;
-  border: 0;
-  border-radius: 3em;
-  font-weight: 700;
-  line-height: 1;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  transition: all 150ms ease;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05);
 }
-.storybook-button--primary {
-  background-color: #555ab9;
-  color: white;
+
+.nexus-button:focus-visible {
+  outline: none;
 }
-.storybook-button--secondary {
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-  background-color: transparent;
-  color: #333;
+
+.nexus-button:disabled {
+  cursor: not-allowed;
 }
-.storybook-button--small {
+
+/* Size variants */
+.nexus-button--md {
   padding: 10px 16px;
-  font-size: 12px;
-}
-.storybook-button--medium {
-  padding: 11px 20px;
+  gap: 8px;
   font-size: 14px;
+  line-height: 20px;
 }
-.storybook-button--large {
-  padding: 12px 24px;
+
+.nexus-button--lg {
+  padding: 10px 18px;
+  gap: 8px;
   font-size: 16px;
+  line-height: 24px;
+}
+
+/* Primary hierarchy - default (navy) */
+.nexus-button--primary {
+  background: #0F172A;
+  border-color: #0F172A;
+  color: #FFF;
+}
+
+.nexus-button--primary:hover:not(:disabled) {
+  background: #0C1427;
+  border-color: #0C1427;
+}
+
+.nexus-button--primary:focus-visible:not(:disabled),
+.nexus-button--primary.nexus-button--focused:not(:disabled) {
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px #E2E8F0;
+}
+
+.nexus-button--primary:disabled,
+.nexus-button--primary.nexus-button--disabled {
+  background: #CBD5E1;
+  border-color: #CBD5E1;
+  color: #FFF;
+}
+
+/* Primary hierarchy - destructive (cyan) */
+.nexus-button--primary.nexus-button--destructive {
+  background: #06B6D4;
+  border-color: #06B6D4;
+  color: #FFF;
+}
+
+.nexus-button--primary.nexus-button--destructive:hover:not(:disabled) {
+  background: #0891B2;
+  border-color: #0891B2;
+}
+
+.nexus-button--primary.nexus-button--destructive:focus-visible:not(:disabled),
+.nexus-button--primary.nexus-button--destructive.nexus-button--focused:not(:disabled) {
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px #CFFAFE;
+}
+
+.nexus-button--primary.nexus-button--destructive:disabled,
+.nexus-button--primary.nexus-button--destructive.nexus-button--disabled {
+  background: #A5F3FC;
+  border-color: #A5F3FC;
+  color: #FFF;
+}
+
+/* Secondary gray hierarchy - default */
+.nexus-button--secondary-gray {
+  background: #FFF;
+  border-color: #D5D7DA;
+  color: #414651;
+}
+
+.nexus-button--secondary-gray:hover:not(:disabled) {
+  background: #FAFAFA;
+  color: #252B37;
+}
+
+.nexus-button--secondary-gray:focus-visible:not(:disabled),
+.nexus-button--secondary-gray.nexus-button--focused:not(:disabled) {
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px #F5F5F5;
+}
+
+.nexus-button--secondary-gray:disabled,
+.nexus-button--secondary-gray.nexus-button--disabled {
+  background: #FFF;
+  border-color: #E9EAEB;
+  color: #D5D7DA;
+}
+
+/* Secondary gray hierarchy - destructive (cyan) */
+.nexus-button--secondary-gray.nexus-button--destructive {
+  background: #FFF;
+  border-color: #67E8F9;
+  color: #0891B2;
+}
+
+.nexus-button--secondary-gray.nexus-button--destructive:hover:not(:disabled) {
+  background: #ECFEFF;
+  color: #0E7490;
+}
+
+.nexus-button--secondary-gray.nexus-button--destructive:focus-visible:not(:disabled),
+.nexus-button--secondary-gray.nexus-button--destructive.nexus-button--focused:not(:disabled) {
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px #CFFAFE;
+}
+
+.nexus-button--secondary-gray.nexus-button--destructive:disabled,
+.nexus-button--secondary-gray.nexus-button--destructive.nexus-button--disabled {
+  background: #FFF;
+  border-color: #A5F3FC;
+  color: #67E8F9;
+}
+
+/* Icon styles */
+.nexus-button__label {
+  display: inline-block;
+}
+
+.nexus-button__icon {
+  flex-shrink: 0;
+}
+
+/* Icon color inheritance for different states */
+.nexus-button--primary .nexus-button__icon,
+.nexus-button--primary.nexus-button--destructive .nexus-button__icon {
+  color: #FFF;
+}
+
+.nexus-button--secondary-gray .nexus-button__icon {
+  color: #414651;
+}
+
+.nexus-button--secondary-gray:hover:not(:disabled) .nexus-button__icon {
+  color: #252B37;
+}
+
+.nexus-button--secondary-gray.nexus-button--destructive .nexus-button__icon {
+  color: #0891B2;
+}
+
+.nexus-button--secondary-gray.nexus-button--destructive:hover:not(:disabled) .nexus-button__icon {
+  color: #0E7490;
+}
+
+.nexus-button--secondary-gray:disabled .nexus-button__icon,
+.nexus-button--secondary-gray.nexus-button--disabled .nexus-button__icon {
+  color: #D5D7DA;
+}
+
+.nexus-button--secondary-gray.nexus-button--destructive:disabled .nexus-button__icon,
+.nexus-button--secondary-gray.nexus-button--destructive.nexus-button--disabled .nexus-button__icon {
+  color: #67E8F9;
 }
