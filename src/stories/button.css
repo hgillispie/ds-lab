@@ -1,30 +1,302 @@
-.storybook-button {
-  display: inline-block;
+/*
+ * Inter font — loaded from Google Fonts.
+ * Weights: 400 (regular), 500 (medium), 600 (semibold), 700 (bold).
+ * The button uses weight 600 (semibold) to match the Figma design spec.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* ============================================================
+   Button Component
+   ============================================================
+   A flexible button supporting two sizes, two hierarchies,
+   a destructive color scheme, and an optional trailing icon.
+
+   Variant axes (combinable):
+     size        — md (14px) | lg (16px)
+     hierarchy   — primary (filled) | secondary-gray (outlined)
+     destructive — false (navy) | true (cyan)
+     icon        — none | trailing
+
+   Interactive states handled via CSS pseudo-classes:
+     :hover     — subtle background/color shift
+     :focus/:focus-visible — adds a 4px focus ring (color varies by variant)
+     :disabled  — muted palette; pointer-events blocked via cursor
+
+   Token mapping (from design-tokens.tokens.midnight.json / Figma):
+     Brand-600  #0F172A — primary default background
+     Brand-700  #0C1427 — primary hover background
+     Brand-200  #CBD5E1 — primary disabled background
+     Error-600  #06B6D4 — destructive primary default background
+     Error-700  #0891B2 — destructive primary hover background
+     Error-200  #A5F3FC — destructive primary disabled background
+     Error-300  #67E8F9 — destructive secondary border
+     Error-800  #0E7490 — destructive secondary hover text
+     Gray-300   #D5D7DA — secondary-gray border (default)
+     Gray-200   #E9EAEB — secondary-gray border (disabled)
+     Gray-700   #414651 — secondary-gray text (default)
+     Gray-800   #252B37 — secondary-gray text (hover)
+     Gray-50    #FAFAFA — secondary-gray background (hover)
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Base — shared across all button variants
+   ------------------------------------------------------------ */
+.btn {
+  /* Lay children (label + icon) out in a horizontal row,
+     vertically and horizontally centred, with an 8px gap. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  /* 8px corners match the design system's borderRadius.md token. */
+  border-radius: 8px;
+
+  /* Reserve the border slot even when transparent so the layout
+     does not shift when a coloured border appears on hover/focus. */
+  border: 1px solid transparent;
+
+  /* Typography — Inter semibold, matching the Figma text style. */
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 600;
+
   cursor: pointer;
-  border: 0;
-  border-radius: 3em;
-  font-weight: 700;
-  line-height: 1;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Subtle drop shadow present on every variant per the Figma spec. */
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05);
+
+  /* Smooth transitions for all state-driven property changes. */
+  transition: background-color 150ms ease, border-color 150ms ease,
+    box-shadow 150ms ease, color 150ms ease;
+
+  /* Remove default anchor-tag underline if the component is
+     rendered as an <a> element via the `as` prop pattern. */
+  text-decoration: none;
+
+  /* Remove the browser default focus outline; we replace it with
+     a custom focus ring via box-shadow on :focus-visible. */
+  outline: none;
+
+  /* Prevent label text from wrapping inside narrow containers. */
+  white-space: nowrap;
 }
-.storybook-button--primary {
-  background-color: #555ab9;
-  color: white;
+
+/* Show a not-allowed cursor when the button is disabled so users
+   get clear feedback that the action is unavailable. */
+.btn:disabled {
+  cursor: not-allowed;
 }
-.storybook-button--secondary {
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-  background-color: transparent;
-  color: #333;
-}
-.storybook-button--small {
+
+/* ============================================================
+   Size variants
+   ============================================================ */
+
+/*
+ * Medium (default) — matches Figma "Size=md" variant.
+ * Padding:   10px top/bottom, 16px left/right
+ * Font size: 14px / line-height 20px (142.857% in Figma)
+ */
+.btn--md {
   padding: 10px 16px;
-  font-size: 12px;
-}
-.storybook-button--medium {
-  padding: 11px 20px;
   font-size: 14px;
+  line-height: 20px;
 }
-.storybook-button--large {
-  padding: 12px 24px;
+
+/*
+ * Large — matches Figma "Size=lg" variant.
+ * Padding:   10px top/bottom, 18px left/right (2px wider than md)
+ * Font size: 16px / line-height 24px (150% in Figma)
+ */
+.btn--lg {
+  padding: 10px 18px;
   font-size: 16px;
+  line-height: 24px;
+}
+
+/* ============================================================
+   PRIMARY — Non-Destructive  (dark navy palette)
+   Design token: Brand-600 #0F172A
+   ============================================================ */
+
+/* Default state — filled dark navy background, white text. */
+.btn--primary:not(.btn--destructive) {
+  background: #0f172a; /* Brand-600 */
+  border-color: #0f172a;
+  color: #fff;
+}
+
+/* Hover — darkens to Brand-700 (#0C1427) for a subtle pressed feel. */
+.btn--primary:not(.btn--destructive):hover:not(:disabled) {
+  background: #0c1427; /* Brand-700 */
+  border-color: #0c1427;
+}
+
+/*
+ * Focus — keeps the default background; adds a 4px slate-blue ring
+ * (#E2E8F0) outside the existing 1px drop-shadow.
+ * :focus-visible targets keyboard focus only; :focus is the
+ * fallback for browsers that do not support :focus-visible.
+ */
+.btn--primary:not(.btn--destructive):focus-visible:not(:disabled),
+.btn--primary:not(.btn--destructive):focus:not(:disabled) {
+  background: #0f172a;
+  border-color: #0f172a;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px #e2e8f0;
+}
+
+/*
+ * Disabled — muted slate (Brand-200, #CBD5E1) replaces the active navy.
+ * Text stays white so the label remains readable against the lighter bg.
+ */
+.btn--primary:not(.btn--destructive):disabled {
+  background: #cbd5e1; /* Brand-200 */
+  border-color: #cbd5e1;
+  color: #fff;
+}
+
+/* ============================================================
+   PRIMARY — Destructive  (cyan palette)
+   Design token: Error-600 #06B6D4
+   Used to signal significant, potentially irreversible actions.
+   ============================================================ */
+
+/* Default state — cyan fill (#06B6D4), white text. */
+.btn--primary.btn--destructive {
+  background: #06b6d4; /* Error-600 */
+  border-color: #06b6d4;
+  color: #fff;
+}
+
+/* Hover — shifts to a deeper cyan (Error-700, #0891B2). */
+.btn--primary.btn--destructive:hover:not(:disabled) {
+  background: #0891b2; /* Error-700 */
+  border-color: #0891b2;
+}
+
+/*
+ * Focus — cyan background unchanged; ring becomes light cyan
+ * (#CFFAFE, accent-100) to stay on-brand with the destructive palette.
+ */
+.btn--primary.btn--destructive:focus-visible:not(:disabled),
+.btn--primary.btn--destructive:focus:not(:disabled) {
+  background: #06b6d4;
+  border-color: #06b6d4;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px #cffafe;
+}
+
+/*
+ * Disabled — very light cyan (Error-200, #A5F3FC).
+ * Text remains white; icon inherits the same colour via currentColor.
+ */
+.btn--primary.btn--destructive:disabled {
+  background: #a5f3fc; /* Error-200 */
+  border-color: #a5f3fc;
+  color: #fff;
+}
+
+/* ============================================================
+   SECONDARY GRAY — Non-Destructive  (white + gray border)
+   Lower-emphasis outlined button for secondary actions.
+   ============================================================ */
+
+/* Default — white bg, gray border (Gray-300, #D5D7DA), dark gray text. */
+.btn--secondary-gray:not(.btn--destructive) {
+  background: #fff;
+  border-color: #d5d7da; /* Gray-300 */
+  color: #414651; /* Gray-700 */
+}
+
+/*
+ * Hover — background shifts to off-white (Gray-50, #FAFAFA) and text
+ * darkens to Gray-800 (#252B37) for increased contrast.
+ * Border colour remains unchanged to avoid a visual border-width jump.
+ */
+.btn--secondary-gray:not(.btn--destructive):hover:not(:disabled) {
+  background: #fafafa; /* Gray-50 */
+  border-color: #d5d7da;
+  color: #252b37; /* Gray-800 */
+}
+
+/*
+ * Focus — white background and border restored to default; a pale gray
+ * ring (#F5F5F5) is added. The ring is lighter here than on primary
+ * buttons to complement the understated secondary palette.
+ */
+.btn--secondary-gray:not(.btn--destructive):focus-visible:not(:disabled),
+.btn--secondary-gray:not(.btn--destructive):focus:not(:disabled) {
+  background: #fff;
+  border-color: #d5d7da;
+  color: #414651;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px #f5f5f5;
+}
+
+/*
+ * Disabled — border lightens to Gray-200 (#E9EAEB) and text fades to
+ * Gray-300 (#D5D7DA), creating a clearly inactive appearance while
+ * keeping the white background.
+ */
+.btn--secondary-gray:not(.btn--destructive):disabled {
+  background: #fff;
+  border-color: #e9eaeb; /* Gray-200 */
+  color: #d5d7da; /* Gray-300 */
+}
+
+/* ============================================================
+   SECONDARY GRAY — Destructive  (white + cyan border/text)
+   Outlined destructive button for lower-emphasis danger actions.
+   ============================================================ */
+
+/* Default — white bg, cyan border (Error-300, #67E8F9), cyan text (Error-700). */
+.btn--secondary-gray.btn--destructive {
+  background: #fff;
+  border-color: #67e8f9; /* Error-300 */
+  color: #0891b2; /* Error-700 */
+}
+
+/*
+ * Hover — background tints to a very pale cyan (Error-50, #ECFEFF)
+ * and text deepens to Error-800 (#0E7490) for legibility.
+ */
+.btn--secondary-gray.btn--destructive:hover:not(:disabled) {
+  background: #ecfeff; /* Error-50 */
+  border-color: #67e8f9;
+  color: #0e7490; /* Error-800 */
+}
+
+/*
+ * Focus — reverts to default background/text; applies the same
+ * light-cyan ring (#CFFAFE) used on the primary destructive variant
+ * to maintain visual consistency across the destructive family.
+ */
+.btn--secondary-gray.btn--destructive:focus-visible:not(:disabled),
+.btn--secondary-gray.btn--destructive:focus:not(:disabled) {
+  background: #fff;
+  border-color: #67e8f9;
+  color: #0891b2;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px #cffafe;
+}
+
+/*
+ * Disabled — border lightens to Error-200 (#A5F3FC) and text fades to
+ * Error-300 (#67E8F9), mirroring the muted appearance of the other
+ * disabled states while staying within the cyan destructive palette.
+ */
+.btn--secondary-gray.btn--destructive:disabled {
+  background: #fff;
+  border-color: #a5f3fc; /* Error-200 */
+  color: #67e8f9; /* Error-300 */
+}
+
+/* ============================================================
+   Trailing Icon
+   ============================================================
+   The SVG icon inherits `color` via `currentColor` on its stroke,
+   so it automatically matches the button text across all states
+   without needing separate colour rules.
+   `flex-shrink: 0` prevents the icon from compressing in narrow
+   containers where only the label would shrink.
+   ============================================================ */
+.btn__trailing-icon {
+  flex-shrink: 0;
+  display: block;
 }
