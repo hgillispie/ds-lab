@@ -1,30 +1,171 @@
-.storybook-button {
-  display: inline-block;
+/* ============================================================
+   Button — Nexus Design System
+   Variants: size (md/lg), hierarchy (primary/secondary-gray),
+             destructive, icon (none/trailing)
+   States: default, hover, focus-visible, disabled
+   ============================================================ */
+
+/* Base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05);
   cursor: pointer;
-  border: 0;
-  border-radius: 3em;
-  font-weight: 700;
-  line-height: 1;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-font-smoothing: antialiased;
 }
-.storybook-button--primary {
-  background-color: #555ab9;
-  color: white;
+
+.btn:focus-visible {
+  outline: none;
 }
-.storybook-button--secondary {
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-  background-color: transparent;
-  color: #333;
+
+.btn:disabled,
+.btn[disabled] {
+  cursor: not-allowed;
+  pointer-events: none;
 }
-.storybook-button--small {
+
+.btn__label {
+  line-height: inherit;
+}
+
+.btn__icon {
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   Sizes
+   ============================================================ */
+
+.btn--md {
   padding: 10px 16px;
-  font-size: 12px;
-}
-.storybook-button--medium {
-  padding: 11px 20px;
   font-size: 14px;
+  line-height: 20px;
 }
-.storybook-button--large {
-  padding: 12px 24px;
+
+.btn--lg {
+  padding: 10px 18px;
   font-size: 16px;
+  line-height: 24px;
+}
+
+/* ============================================================
+   Primary — Non-destructive (dark navy)
+   ============================================================ */
+
+.btn--primary:not(.btn--destructive) {
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #fff;
+}
+
+.btn--primary:not(.btn--destructive):hover:not(:disabled) {
+  background: #0c1427;
+  border-color: #0c1427;
+}
+
+.btn--primary:not(.btn--destructive):focus-visible {
+  box-shadow:
+    0 1px 2px 0 rgba(10, 13, 18, 0.05),
+    0 0 0 4px #e2e8f0;
+}
+
+.btn--primary:not(.btn--destructive):disabled {
+  background: #cbd5e1;
+  border-color: #cbd5e1;
+  color: #fff;
+}
+
+/* ============================================================
+   Primary — Destructive (cyan)
+   ============================================================ */
+
+.btn--primary.btn--destructive {
+  background: #06b6d4;
+  border-color: #06b6d4;
+  color: #fff;
+}
+
+.btn--primary.btn--destructive:hover:not(:disabled) {
+  background: #0891b2;
+  border-color: #0891b2;
+}
+
+.btn--primary.btn--destructive:focus-visible {
+  box-shadow:
+    0 1px 2px 0 rgba(10, 13, 18, 0.05),
+    0 0 0 4px #cffafe;
+}
+
+.btn--primary.btn--destructive:disabled {
+  background: #a5f3fc;
+  border-color: #a5f3fc;
+  color: #fff;
+}
+
+/* ============================================================
+   Secondary gray — Non-destructive
+   ============================================================ */
+
+.btn--secondary-gray:not(.btn--destructive) {
+  background: #fff;
+  border-color: #d5d7da;
+  color: #414651;
+}
+
+.btn--secondary-gray:not(.btn--destructive):hover:not(:disabled) {
+  background: #fafafa;
+  color: #252b37;
+}
+
+.btn--secondary-gray:not(.btn--destructive):focus-visible {
+  box-shadow:
+    0 1px 2px 0 rgba(10, 13, 18, 0.05),
+    0 0 0 4px #f5f5f5;
+}
+
+.btn--secondary-gray:not(.btn--destructive):disabled {
+  background: #fff;
+  border-color: #e9eaeb;
+  color: #d5d7da;
+}
+
+/* ============================================================
+   Secondary gray — Destructive (cyan border + teal text)
+   ============================================================ */
+
+.btn--secondary-gray.btn--destructive {
+  background: #fff;
+  border-color: #67e8f9;
+  color: #0891b2;
+}
+
+.btn--secondary-gray.btn--destructive:hover:not(:disabled) {
+  background: #ecfeff;
+  color: #0e7490;
+}
+
+.btn--secondary-gray.btn--destructive:focus-visible {
+  box-shadow:
+    0 1px 2px 0 rgba(10, 13, 18, 0.05),
+    0 0 0 4px #cffafe;
+}
+
+.btn--secondary-gray.btn--destructive:disabled {
+  background: #fff;
+  border-color: #a5f3fc;
+  color: #67e8f9;
 }
