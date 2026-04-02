@@ -1,171 +1,283 @@
 /* ============================================================
    Button — Nexus Design System
-   Variants: size (md/lg), hierarchy (primary/secondary-gray),
-             destructive, icon (none/trailing)
-   States: default, hover, focus-visible, disabled
+
+   This file contains all visual styles for the Button component.
+   Styles are organized by: base → size → hierarchy × destructive.
+
+   Variant dimensions
+   ──────────────────
+   Size        : md (14px / 10-16px padding) | lg (16px / 10-18px padding)
+   Hierarchy   : primary (solid fill) | secondary-gray (outlined)
+   Destructive : false (dark navy scheme) | true (cyan / teal scheme)
+   Icon        : none | trailing (circle SVG — color inherits from text)
+
+   Interactive states (applied automatically via CSS pseudo-classes)
+   ──────────────────────────────────────────────────────────────────
+   :hover         → darkens or tints the background
+   :focus-visible → adds a 4px offset ring (keyboard-only, not mouse)
+   :disabled      → muted colors; pointer-events disabled
+
+   Color tokens used (from Figma / design-tokens.ts)
+   ──────────────────────────────────────────────────
+   Brand navy      : #0f172a  (default)  #0c1427  (hover)  #cbd5e1  (disabled)
+   Cyan/teal       : #06b6d4  (default)  #0891b2  (hover)  #a5f3fc  (disabled)
+   Gray outline    : #d5d7da  (border)   #e9eaeb  (disabled border)
+   Gray text       : #414651  (default)  #252b37  (hover)  #d5d7da  (disabled)
+   Destructive text: #0891b2  (default)  #0e7490  (hover)  #67e8f9  (disabled)
+
+   Focus rings
+   ───────────
+   Primary (navy)          : #e2e8f0
+   Primary / Secondary cyan: #cffafe
+   Secondary gray          : #f5f5f5
    ============================================================ */
 
-/* Base */
+
+/* ============================================================
+   Base — shared across every button variant
+   ============================================================ */
+
 .btn {
+  /* Lay out label + optional trailing icon side-by-side */
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 8px; /* 8px between label text and icon */
+
+  /* Shape — 8px matches the design-token borderRadius.md */
   border-radius: 8px;
+
+  /* Reserve the border slot even when transparent so size stays stable
+     across hierarchy variants (primary has a colored border; secondary uses it
+     for the outline; both share the same box model). */
   border: 1px solid transparent;
+
+  /* Subtle drop shadow from the Figma spec: 1px blur, 5% opacity */
   box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05);
+
   cursor: pointer;
+
+  /* Typography — Inter 600 is mandatory per the design spec */
   font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
   font-weight: 600;
   font-style: normal;
+
+  /* Prevent label from wrapping inside a button */
   white-space: nowrap;
+
+  /* Reset browser anchor styles when <a> is used as a button */
   text-decoration: none;
+
+  /* Smooth transitions for all interactive properties.
+     150ms matches design-tokens.animation.duration.fast. */
   transition:
     background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1),
-    color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    border-color     150ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow       150ms cubic-bezier(0.4, 0, 0.2, 1),
+    color            150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Crisp sub-pixel rendering for light text on dark backgrounds */
   -webkit-font-smoothing: antialiased;
 }
 
+/* Remove the default browser focus outline — we supply our own ring
+   via box-shadow so it appears only on keyboard navigation. */
 .btn:focus-visible {
   outline: none;
 }
 
+/* Disabled state — block all interaction and show a not-allowed cursor.
+   pointer-events: none prevents hover styles from bleeding through. */
 .btn:disabled,
 .btn[disabled] {
   cursor: not-allowed;
   pointer-events: none;
 }
 
+/* Label wrapper — inherits line-height from the size modifier so
+   vertical rhythm is consistent whether children or the `label` prop is used. */
 .btn__label {
   line-height: inherit;
 }
 
+/* Icon wrapper — prevents the SVG from shrinking when the button is
+   inside a flex container. SVG uses currentColor so it always matches
+   the button's text color without extra overrides. */
 .btn__icon {
   flex-shrink: 0;
 }
+
 
 /* ============================================================
    Sizes
    ============================================================ */
 
+/* md — default size; 14px body text with 20px leading (142.9% line-height).
+   Horizontal padding is 16px per the Figma "Size=md" spec. */
 .btn--md {
   padding: 10px 16px;
   font-size: 14px;
   line-height: 20px;
 }
 
+/* lg — larger size; 16px body text with 24px leading (150% line-height).
+   Horizontal padding increases to 18px per the Figma "Size=lg" spec. */
 .btn--lg {
   padding: 10px 18px;
   font-size: 16px;
   line-height: 24px;
 }
 
+
 /* ============================================================
-   Primary — Non-destructive (dark navy)
+   Primary — Non-destructive  (dark navy #0f172a)
+
+   Used for the main call-to-action. Solid fill with white text.
+   Maps to design token: Brand-600 (#0F172A).
    ============================================================ */
 
+/* Default — full-opacity navy fill */
 .btn--primary:not(.btn--destructive) {
-  background: #0f172a;
+  background: #0f172a;   /* Brand-600 */
   border-color: #0f172a;
   color: #fff;
 }
 
+/* Hover — slightly darker navy (Brand-700: #0c1427) for a visible depth change */
 .btn--primary:not(.btn--destructive):hover:not(:disabled) {
-  background: #0c1427;
+  background: #0c1427;   /* Brand-700 */
   border-color: #0c1427;
 }
 
+/* Focus — same navy fill; adds a 4px slate ring outside the border.
+   Ring color #e2e8f0 provides sufficient contrast on light backgrounds. */
 .btn--primary:not(.btn--destructive):focus-visible {
   box-shadow:
-    0 1px 2px 0 rgba(10, 13, 18, 0.05),
-    0 0 0 4px #e2e8f0;
+    0 1px 2px 0 rgba(10, 13, 18, 0.05), /* retain the base drop shadow */
+    0 0 0 4px #e2e8f0;                   /* slate focus ring */
 }
 
+/* Disabled — washes out to a soft slate (Brand-200: #cbd5e1).
+   White text is maintained for legibility even at reduced opacity. */
 .btn--primary:not(.btn--destructive):disabled {
-  background: #cbd5e1;
+  background: #cbd5e1;   /* Brand-200 */
   border-color: #cbd5e1;
   color: #fff;
 }
 
+
 /* ============================================================
-   Primary — Destructive (cyan)
+   Primary — Destructive  (cyan #06b6d4)
+
+   Used when the primary action carries extra weight (e.g. confirm,
+   submit, highlight). Replaces navy with the brand accent cyan.
+   Maps to design token: Error-600 (#06B6D4) in Figma.
    ============================================================ */
 
+/* Default — vivid cyan fill */
 .btn--primary.btn--destructive {
-  background: #06b6d4;
+  background: #06b6d4;   /* accent-500 / Error-600 */
   border-color: #06b6d4;
   color: #fff;
 }
 
+/* Hover — deeper teal (Error-700: #0891b2) for active feedback */
 .btn--primary.btn--destructive:hover:not(:disabled) {
-  background: #0891b2;
+  background: #0891b2;   /* Error-700 */
   border-color: #0891b2;
 }
 
+/* Focus — retains cyan fill; adds a light cyan ring (#cffafe = accent-100)
+   to complement the fill color. */
 .btn--primary.btn--destructive:focus-visible {
   box-shadow:
-    0 1px 2px 0 rgba(10, 13, 18, 0.05),
-    0 0 0 4px #cffafe;
+    0 1px 2px 0 rgba(10, 13, 18, 0.05), /* retain the base drop shadow */
+    0 0 0 4px #cffafe;                   /* light cyan focus ring */
 }
 
+/* Disabled — washed-out pale cyan (Error-200: #a5f3fc).
+   White text maintained for readability. */
 .btn--primary.btn--destructive:disabled {
-  background: #a5f3fc;
+  background: #a5f3fc;   /* Error-200 */
   border-color: #a5f3fc;
   color: #fff;
 }
 
+
 /* ============================================================
-   Secondary gray — Non-destructive
+   Secondary gray — Non-destructive  (outlined, white background)
+
+   Used alongside a primary button as a secondary action.
+   White fill with a light gray border and dark gray text.
+   Maps to design token: Gray-300 border (#D5D7DA), Gray-700 text (#414651).
    ============================================================ */
 
+/* Default — white fill with a 1px gray border */
 .btn--secondary-gray:not(.btn--destructive) {
   background: #fff;
-  border-color: #d5d7da;
-  color: #414651;
+  border-color: #d5d7da;  /* Gray-300 */
+  color: #414651;          /* Gray-700 */
 }
 
+/* Hover — very light gray tint (#fafafa) on the background; text darkens
+   slightly to Gray-800 (#252b37) for stronger contrast. Border stays. */
 .btn--secondary-gray:not(.btn--destructive):hover:not(:disabled) {
-  background: #fafafa;
-  color: #252b37;
+  background: #fafafa;   /* Gray-50 */
+  color: #252b37;         /* Gray-800 */
 }
 
+/* Focus — white fill maintained; adds a subtle neutral ring (#f5f5f5)
+   that is visible against both white and light gray page backgrounds. */
 .btn--secondary-gray:not(.btn--destructive):focus-visible {
   box-shadow:
-    0 1px 2px 0 rgba(10, 13, 18, 0.05),
-    0 0 0 4px #f5f5f5;
+    0 1px 2px 0 rgba(10, 13, 18, 0.05), /* retain the base drop shadow */
+    0 0 0 4px #f5f5f5;                   /* neutral focus ring */
 }
 
+/* Disabled — lighter border (Gray-200: #e9eaeb) and very light text
+   (Gray-300: #d5d7da). Background stays white. */
 .btn--secondary-gray:not(.btn--destructive):disabled {
   background: #fff;
-  border-color: #e9eaeb;
-  color: #d5d7da;
+  border-color: #e9eaeb;  /* Gray-200 */
+  color: #d5d7da;          /* Gray-300 */
 }
+
 
 /* ============================================================
-   Secondary gray — Destructive (cyan border + teal text)
+   Secondary gray — Destructive  (cyan border + teal text, white background)
+
+   Used when a secondary outlined button represents the key action.
+   White fill; border and text switch to the cyan / teal palette.
+   Maps to design token: Error-300 border (#67E8F9), Error-700 text (#0891B2).
    ============================================================ */
 
+/* Default — white fill with cyan border and teal text */
 .btn--secondary-gray.btn--destructive {
   background: #fff;
-  border-color: #67e8f9;
-  color: #0891b2;
+  border-color: #67e8f9;  /* Error-300 */
+  color: #0891b2;          /* Error-700 */
 }
 
+/* Hover — background tints to pale cyan (#ecfeff = accent-50);
+   text deepens to dark teal (#0e7490 = Error-800) for contrast. */
 .btn--secondary-gray.btn--destructive:hover:not(:disabled) {
-  background: #ecfeff;
-  color: #0e7490;
+  background: #ecfeff;   /* accent-50 / Error-50 */
+  color: #0e7490;         /* Error-800 */
 }
 
+/* Focus — white fill, cyan border; adds a light cyan ring (#cffafe)
+   matching the primary destructive focus ring for consistency. */
 .btn--secondary-gray.btn--destructive:focus-visible {
   box-shadow:
-    0 1px 2px 0 rgba(10, 13, 18, 0.05),
-    0 0 0 4px #cffafe;
+    0 1px 2px 0 rgba(10, 13, 18, 0.05), /* retain the base drop shadow */
+    0 0 0 4px #cffafe;                   /* light cyan focus ring */
 }
 
+/* Disabled — border and text wash out to pale cyan tones.
+   Border: Error-200 (#a5f3fc), text: Error-300 (#67e8f9).
+   Background stays white. */
 .btn--secondary-gray.btn--destructive:disabled {
   background: #fff;
-  border-color: #a5f3fc;
-  color: #67e8f9;
+  border-color: #a5f3fc;  /* Error-200 */
+  color: #67e8f9;          /* Error-300 */
 }
