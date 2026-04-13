@@ -1,0 +1,168 @@
+/* ============================================
+   Button Component — Nexus Design System
+   ============================================ */
+
+/* Design tokens scoped to button */
+.btn {
+  /* Brand / Primary */
+  --btn-brand-default: #0f172a;
+  --btn-brand-hover: #0c1427;
+  --btn-brand-disabled: #cbd5e1;
+  --btn-brand-focus-ring: #e2e8f0;
+
+  /* Accent / Destructive (cyan palette) */
+  --btn-accent-default: #06b6d4;
+  --btn-accent-hover: #0891b2;
+  --btn-accent-disabled: #a5f3fc;
+  --btn-accent-disabled-text: #67e8f9;
+  --btn-accent-border: #67e8f9;
+  --btn-accent-bg-hover: #ecfeff;
+  --btn-accent-text-hover: #0e7490;
+  --btn-accent-focus-ring: #cffafe;
+
+  /* Gray / Secondary */
+  --btn-gray-border: #d5d7da;
+  --btn-gray-border-disabled: #e9eaeb;
+  --btn-gray-text: #414651;
+  --btn-gray-text-hover: #252b37;
+  --btn-gray-text-disabled: #d5d7da;
+  --btn-gray-bg-hover: #fafafa;
+  --btn-gray-focus-ring: #f5f5f5;
+
+  --btn-white: #ffffff;
+  --btn-shadow-base: 0 1px 2px 0 rgba(10, 13, 18, 0.05);
+}
+
+/* ── Base ─────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  box-shadow: var(--btn-shadow-base);
+  cursor: pointer;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn:focus-visible {
+  outline: none;
+}
+
+/* ── Sizes ────────────────────────────────── */
+.btn--md {
+  padding: 10px 16px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.btn--lg {
+  padding: 10px 18px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* ── Primary ──────────────────────────────── */
+.btn--primary {
+  background: var(--btn-brand-default);
+  border-color: var(--btn-brand-default);
+  color: var(--btn-white);
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: var(--btn-brand-hover);
+  border-color: var(--btn-brand-hover);
+}
+
+.btn--primary:focus-visible:not(:disabled) {
+  box-shadow: var(--btn-shadow-base), 0 0 0 4px var(--btn-brand-focus-ring);
+}
+
+.btn--primary:disabled {
+  background: var(--btn-brand-disabled);
+  border-color: var(--btn-brand-disabled);
+  cursor: not-allowed;
+}
+
+/* ── Primary + Destructive ────────────────── */
+.btn--primary.btn--destructive {
+  background: var(--btn-accent-default);
+  border-color: var(--btn-accent-default);
+  color: var(--btn-white);
+}
+
+.btn--primary.btn--destructive:hover:not(:disabled) {
+  background: var(--btn-accent-hover);
+  border-color: var(--btn-accent-hover);
+}
+
+.btn--primary.btn--destructive:focus-visible:not(:disabled) {
+  box-shadow: var(--btn-shadow-base), 0 0 0 4px var(--btn-accent-focus-ring);
+}
+
+.btn--primary.btn--destructive:disabled {
+  background: var(--btn-accent-disabled);
+  border-color: var(--btn-accent-disabled);
+  cursor: not-allowed;
+}
+
+/* ── Secondary Gray ───────────────────────── */
+.btn--secondary-gray {
+  background: var(--btn-white);
+  border-color: var(--btn-gray-border);
+  color: var(--btn-gray-text);
+}
+
+.btn--secondary-gray:hover:not(:disabled) {
+  background: var(--btn-gray-bg-hover);
+  color: var(--btn-gray-text-hover);
+}
+
+.btn--secondary-gray:focus-visible:not(:disabled) {
+  box-shadow: var(--btn-shadow-base), 0 0 0 4px var(--btn-gray-focus-ring);
+}
+
+.btn--secondary-gray:disabled {
+  border-color: var(--btn-gray-border-disabled);
+  color: var(--btn-gray-text-disabled);
+  cursor: not-allowed;
+}
+
+/* ── Secondary Gray + Destructive ─────────── */
+.btn--secondary-gray.btn--destructive {
+  background: var(--btn-white);
+  border-color: var(--btn-accent-border);
+  color: var(--btn-accent-hover);
+}
+
+.btn--secondary-gray.btn--destructive:hover:not(:disabled) {
+  background: var(--btn-accent-bg-hover);
+  color: var(--btn-accent-text-hover);
+}
+
+.btn--secondary-gray.btn--destructive:focus-visible:not(:disabled) {
+  box-shadow: var(--btn-shadow-base), 0 0 0 4px var(--btn-accent-focus-ring);
+}
+
+.btn--secondary-gray.btn--destructive:disabled {
+  border-color: var(--btn-accent-disabled);
+  color: var(--btn-accent-disabled-text);
+  cursor: not-allowed;
+}
+
+/* ── Icon ─────────────────────────────────── */
+.btn__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
