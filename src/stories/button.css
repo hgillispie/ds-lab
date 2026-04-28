@@ -1,30 +1,156 @@
-.storybook-button {
-  display: inline-block;
+/* ============================================================
+   Button — Nexus Design System
+   Variants: size × hierarchy × destructive × state × icon
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* ---- Base ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 600;
   cursor: pointer;
-  border: 0;
-  border-radius: 3em;
-  font-weight: 700;
-  line-height: 1;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05);
+  transition: background-color 150ms ease, border-color 150ms ease,
+    color 150ms ease, box-shadow 150ms ease;
+  white-space: nowrap;
+  outline: none;
+  text-decoration: none;
 }
-.storybook-button--primary {
-  background-color: #555ab9;
-  color: white;
-}
-.storybook-button--secondary {
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-  background-color: transparent;
-  color: #333;
-}
-.storybook-button--small {
+
+/* ---- Sizes ---- */
+.btn--md {
   padding: 10px 16px;
-  font-size: 12px;
-}
-.storybook-button--medium {
-  padding: 11px 20px;
   font-size: 14px;
+  line-height: 20px;
 }
-.storybook-button--large {
-  padding: 12px 24px;
+
+.btn--lg {
+  padding: 10px 18px;
   font-size: 16px;
+  line-height: 24px;
+}
+
+/* ---- Primary / Non-Destructive ---- */
+.btn--primary:not(.btn--destructive) {
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #fff;
+}
+
+.btn--primary:not(.btn--destructive):hover:not(:disabled) {
+  background: #0c1427;
+  border-color: #0c1427;
+}
+
+.btn--primary:not(.btn--destructive):focus-visible:not(:disabled) {
+  background: #0f172a;
+  border-color: #0f172a;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px #e2e8f0;
+}
+
+.btn--primary:not(.btn--destructive):disabled {
+  background: #cbd5e1;
+  border-color: #cbd5e1;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+/* ---- Primary / Destructive (cyan) ---- */
+.btn--primary.btn--destructive {
+  background: #06b6d4;
+  border-color: #06b6d4;
+  color: #fff;
+}
+
+.btn--primary.btn--destructive:hover:not(:disabled) {
+  background: #0891b2;
+  border-color: #0891b2;
+}
+
+.btn--primary.btn--destructive:focus-visible:not(:disabled) {
+  background: #06b6d4;
+  border-color: #06b6d4;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px #cffafe;
+}
+
+.btn--primary.btn--destructive:disabled {
+  background: #a5f3fc;
+  border-color: #a5f3fc;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+/* ---- Secondary Gray / Non-Destructive ---- */
+.btn--secondary-gray:not(.btn--destructive) {
+  background: #fff;
+  border-color: #d5d7da;
+  color: #414651;
+}
+
+.btn--secondary-gray:not(.btn--destructive):hover:not(:disabled) {
+  background: #fafafa;
+  border-color: #d5d7da;
+  color: #252b37;
+}
+
+.btn--secondary-gray:not(.btn--destructive):focus-visible:not(:disabled) {
+  background: #fff;
+  border-color: #d5d7da;
+  color: #414651;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px #f5f5f5;
+}
+
+.btn--secondary-gray:not(.btn--destructive):disabled {
+  background: #fff;
+  border-color: #e9eaeb;
+  color: #d5d7da;
+  cursor: not-allowed;
+}
+
+/* ---- Secondary Gray / Destructive (cyan) ---- */
+.btn--secondary-gray.btn--destructive {
+  background: #fff;
+  border-color: #67e8f9;
+  color: #0891b2;
+}
+
+.btn--secondary-gray.btn--destructive:hover:not(:disabled) {
+  background: #ecfeff;
+  border-color: #67e8f9;
+  color: #0e7490;
+}
+
+.btn--secondary-gray.btn--destructive:focus-visible:not(:disabled) {
+  background: #fff;
+  border-color: #67e8f9;
+  color: #0891b2;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px #cffafe;
+}
+
+.btn--secondary-gray.btn--destructive:disabled {
+  background: #fff;
+  border-color: #a5f3fc;
+  color: #67e8f9;
+  cursor: not-allowed;
+}
+
+/* ---- Icon ---- */
+.btn-trailing-icon {
+  flex-shrink: 0;
+}
+
+/* ---- Label ---- */
+.btn-label {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
 }
