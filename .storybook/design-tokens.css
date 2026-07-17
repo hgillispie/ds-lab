@@ -60,6 +60,19 @@
   --color-neutral-800: #262626;
   --color-neutral-900: #171717;
 
+  --color-gray-200: #E9EAEB;
+  --color-gray-300: #D5D7DA;
+  --color-gray-700: #414651;
+  --color-gray-800: #252B37;
+
+  --color-brand-100: #E2E8F0;
+  --color-brand-200: #CBD5E1;
+  --color-brand-600: #0F172A;
+  --color-brand-700: #0C1427;
+
+  --color-cyan-600: #0891B2;
+  --color-cyan-700: #0E7490;
+
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #0A0E1B 0%, #00D9FF 100%);
   --gradient-accent: linear-gradient(90deg, #00D9FF 0%, #E8B4A2 100%);
